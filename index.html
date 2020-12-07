@@ -6,8 +6,7 @@
     .float {
       position: absolute;
       bottom: 10%;
-      left: 25%;
-      width: 50%;
+      left: 40%;
     }
   </style>
 </head>
@@ -17,13 +16,14 @@
   <a-scene screenshotdimensions>
     <a-assets>
       <video id="webcam" playsinline></video>
+      <a-asset-item id="burger" src="assets/models/burger.glb"></a-asset-item>
     </a-assets>
     <a-entity camera look-controls>
       <a-plane position="0 0 -5" width="4.3" height="8.4" material="src: #webcam; shader: flat"></a-plane>
       <a-sphere position="0 -1.5 -5" radius="0.6" color="#0000FF"></a-sphere>
     </a-entity>
   </a-scene>
-    <img src="assets/icon-camera.png" height="150" size="150" onclick="capture()">
+    <img class="float" src="assets/icon-camera.png" height="150" size="150" onclick="capture()">
   <script>
     AFRAME.registerComponent('screenshotdimensions', {
         schema: {},
