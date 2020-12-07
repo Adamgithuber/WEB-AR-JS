@@ -1,0 +1,58 @@
+<html>
+
+<head>
+  <script src="<https://aframe.io/releases/1.1.0/aframe.min.js>"></script>
+  <style>
+    .float {
+      position: absolute;
+      bottom: 10%;
+      left: 25%;
+      width: 50%;
+    }
+  </style>
+</head>
+
+<body>
+
+  <a-scene screenshotdimensions>
+    <a-assets>
+      <video id="webcam" playsinline></video>
+    </a-assets>
+    <a-entity camera look-controls>
+      <a-plane position="0 0 -5" width="4.3" height="8.4" material="src: #webcam; shader: flat"></a-plane>
+      <a-sphere position="0 -1.5 -5" radius="0.3" color="#EF2D5E"></a-sphere>
+    </a-entity>
+  </a-scene>
+    <button class="float" onclick="capture()">
+      Hello
+    </button>
+  <script>
+    AFRAME.registerComponent('screenshotdimensions', {
+        schema: {},
+
+        init: function () {
+          const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
+          const vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0)
+          this.el.sceneEl.setAttribute('screenshot', {
+            width: vw,
+            height: vh
+          });
+        }
+      });
+
+    // You can also set which camera to use (front/back/etc)
+    navigator.mediaDevices.getUserMedia({ audio: false, video: true })
+      .then(stream => {
+        let $video = document.querySelector('video')
+        $video.srcObject = stream
+        $video.onloadedmetadata = () => {
+          $video.play()
+        }
+      })
+    function capture() {
+      document.querySelector('a-scene').components.screenshot.capture('perspective');
+    }
+  </script>
+</body>
+
+</html>
