@@ -20,10 +20,20 @@
     </a-assets>
     <a-entity camera look-controls>
       <a-plane position="0 0 -5" width="4.3" height="8.4" material="src: #webcam; shader: flat"></a-plane>
-      <a-sphere position="0 -1.5 -5" radius="0.6" color="#0000FF"></a-sphere>
+      <a-entity
+        animation="property: rotation; to: 0 0 360; easing: linear; loop: true; dur: 10000"
+        gltf-model="#burger"
+        scale="10 10 10"
+        position="100 -100 -150"
+        rotation="0 0 0"
+        class="clickable"
+        gesture-handler="minScale: 0.25; maxScale: 10"
+        id="burgerOnPress"
+      >
+      </a-entity>
     </a-entity>
   </a-scene>
-    <img class="float" src="assets/icon-camera.png" height="150" size="150" onclick="capture()">
+    <img class="float" src="assets/icon-camera.png" height="50" size="50" onclick="capture()">
   <script>
     AFRAME.registerComponent('screenshotdimensions', {
         schema: {},
